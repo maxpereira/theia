@@ -1,8 +1,18 @@
 <html>
 <head>
+<style>
+	img {
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+</style>
 <script src="jquery.min.js"></script>
 <script type="text/javascript">
 	// ------------- Configurable Theia Options -------------
+	
+	// Choose cycle mode (random, ordered)
+	var cycleMode = "ordered";
 	
 	// Image display duration in seconds
 	var duration = 1; // Default: 30
@@ -25,10 +35,35 @@
 		arrImg = data.split("\n");
 	})
 	
+	var rndIndex = 0;
+	var rndIndexOld = 0;
+	
 	// Load the next image to the viewport randomly
 	function theiaTick() {
 		var imgNext = new Image();
-		var rndImg = arrImg[Math.floor(Math.random()*arrImg.length)];
+		
+		rndIndexOld = rndIndex;
+		
+		if (cycleMode == "random") {
+			rndIndex = Math.floor(Math.random()*arrImg.length);
+			
+			console.info("Random");
+			
+			while (rndIndex == rndIndexOld) {
+				rndIndex = Math.floor(Math.random()*arrImg.length);
+			}
+		} else if (cycleMode == "ordered") {
+		
+			console.info("ordered");
+		
+			if (rndIndexOld < arrImg.length-1) {
+				rndIndex = rndIndexOld+1;
+			} else {
+				rndIndex = 0;
+			}
+		}
+		
+		var rndImg = arrImg[rndIndex];
 		imgNext.src = "images/" + rndImg;
 		if (forceSize == true) {
 			imgNext.width = forceWidth;
