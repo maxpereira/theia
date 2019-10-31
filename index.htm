@@ -1,5 +1,6 @@
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	// ------------- Configurable Theia Options -------------
 	
@@ -16,10 +17,16 @@
 	var fadeTime = 3; // Fade time in seconds
 
 	// Array of image filenames
-	var arrImg = ["cat1.jpeg", "cat2.jpeg", "cat3.png"];
+	//var arrImg = ["cat1.jpeg", "cat2.jpeg", "cat3.png"];
+	
+	arrImg = [];
+	
+	$.get('files.txt', function(data) {    
+		arrImg = data.split("\n");
+	})
 
 	// -------------  END Configurable Options  -------------
-	
+
 	// Load the next image to the viewport randomly
 	function theiaTick() {
 		var imgNext = new Image();
