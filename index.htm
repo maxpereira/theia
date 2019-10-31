@@ -52,7 +52,7 @@
 		// Randomly cycle through photos
 		if (cycleMode == "random") {
 			rndIndex = Math.floor(Math.random()*arrImg.length);
-			while (rndIndex == rndIndexOld) {
+			if (rndIndex == rndIndexOld) {
 				rndIndex = Math.floor(Math.random()*arrImg.length);
 			}
 		// Cycle through photos in order
