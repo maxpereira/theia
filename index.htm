@@ -1,13 +1,36 @@
 <html>
 <head>
 <script type="text/javascript">
+	// ------------- Configurable Theia Options -------------
+	
+	// Force image size to fit the screen
+	var forceSize = false; // Default: false
+	var forceWidth = 1920;
+	var forceHeight = 1080;
+	
+	// Fade between images
+	var fadeBetween = false; // Default: false
+	var fadeTime = 3; // Fade time in seconds
+
+	// Array of image filenames
+	var arrImg = ["cat1.jpeg", "cat2.jpeg", "cat3.png"];
+
+	// -------------  END Configurable Options  -------------
+	
+	// Load the next image to the viewport randomly
 	function theiaLoad() {
-		var arrImg = ["cat1.jpeg", "cat2.jpeg"];
 		var imgNext = new Image();
-		imgNext.src = "images/" + arrImg[0];
-		document.getElementById("theiaContainer").appendChild(imgNext);
+		var rndImg = arrImg[Math.floor(Math.random()*arrImg.length)];
+		imgNext.src = "images/" + rndImg;
+		if (forceSize == true) {
+			imgNext.width = forceWidth;
+			imgNext.height = forceHeight;
+		}
+		//document.getElementById("theiaContainer").appendChild(imgNext);
+		document.body.appendChild(imgNext);
 	}
 	
+	// Load the first image on page load
 	window.onload=theiaLoad;
 </script>
 <body>
