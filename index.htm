@@ -3,6 +3,9 @@
 <script type="text/javascript">
 	// ------------- Configurable Theia Options -------------
 	
+	// Image display duration in seconds
+	var duration = 1; // Default: 30
+	
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
 	var forceWidth = 1920;
@@ -18,7 +21,7 @@
 	// -------------  END Configurable Options  -------------
 	
 	// Load the next image to the viewport randomly
-	function theiaLoad() {
+	function theiaTick() {
 		var imgNext = new Image();
 		var rndImg = arrImg[Math.floor(Math.random()*arrImg.length)];
 		imgNext.src = "images/" + rndImg;
@@ -27,13 +30,16 @@
 			imgNext.height = forceHeight;
 		}
 		//document.getElementById("theiaContainer").appendChild(imgNext);
+		document.body.innerHTML = "<div id='theiaContainer'></div>";
 		document.body.appendChild(imgNext);
 	}
 	
 	// Load the first image on page load
-	window.onload=theiaLoad;
+	window.onload=theiaTick;
+	
+	// Start Theia heartbeat
+	setInterval(theiaTick, duration*1000);
 </script>
-<body>
-	<div id="theiaContainer"></div>
+<body bgcolor="black">
 </body>
 </html>
