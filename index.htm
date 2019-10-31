@@ -7,12 +7,17 @@
 		left: 0;
 	}
 </style>
+<title>Theia Signage Window</title>
 <script src="jquery.min.js"></script>
 <script type="text/javascript">
+	// Theia Digital Signage Software
+	// Author: Max Pereira - 2019
+	// Github: maxpereira
+
 	// ------------- Configurable Theia Options -------------
 	
 	// Choose cycle mode (random, ordered)
-	var cycleMode = "ordered";
+	var cycleMode = "ordered"; // Default: ordered
 	
 	// Image display duration in seconds
 	var duration = 1; // Default: 30
@@ -44,18 +49,14 @@
 		
 		rndIndexOld = rndIndex;
 		
+		// Randomly cycle through photos
 		if (cycleMode == "random") {
 			rndIndex = Math.floor(Math.random()*arrImg.length);
-			
-			console.info("Random");
-			
 			while (rndIndex == rndIndexOld) {
 				rndIndex = Math.floor(Math.random()*arrImg.length);
 			}
+		// Cycle through photos in order
 		} else if (cycleMode == "ordered") {
-		
-			console.info("ordered");
-		
 			if (rndIndexOld < arrImg.length-1) {
 				rndIndex = rndIndexOld+1;
 			} else {
@@ -69,7 +70,7 @@
 			imgNext.width = forceWidth;
 			imgNext.height = forceHeight;
 		}
-		//document.getElementById("theiaContainer").appendChild(imgNext);
+
 		document.body.innerHTML = "<div id='theiaContainer'></div>";
 		document.body.appendChild(imgNext);
 	}
