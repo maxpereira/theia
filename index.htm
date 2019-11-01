@@ -31,7 +31,7 @@
 	var forceHeight = 1080;
 	
 	// Fade between images
-	var fadeBetween = true; // Default: false
+	var fadeBetween = false; // Default: false
 	var fadeTime = 1; // Fade time in seconds
 
 	// -------------  END Configurable Options  -------------
@@ -45,7 +45,7 @@
 	
 	// Load the next image to the viewport randomly
 	function theiaTick() {
-	
+		
 		// Get array of image filenames from files.txt
 		$.get('files.txt', function(data) {    
 			arrImg = data.split("\n");
@@ -59,7 +59,8 @@
 		if (cycleMode == "random") {
 			rndIndex = Math.floor(Math.random()*arrImg.length);
 			if (rndIndex == rndIndexOld) {
-				while (rndIndex == rndIndexOld) {
+				rndIndex = Math.floor(Math.random()*arrImg.length);
+				if (rndIndex == rndIndexOld) {
 					rndIndex = Math.floor(Math.random()*arrImg.length);
 				}
 			}
