@@ -5,6 +5,7 @@
 		position: fixed;
 		top: 0;
 		left: 0;
+		cursor: none;
 	}
 </style>
 <title>Theia Signage Window</title>
@@ -17,7 +18,7 @@
 	// ------------- Configurable Theia Options -------------
 	
 	// Choose cycle mode (random, ordered)
-	var cycleMode = "random"; // Default: ordered
+	var cycleMode = "ordered"; // Default: ordered
 	
 	// Image display duration in seconds
 	var duration = 3; // Default: 30
@@ -55,7 +56,8 @@
 		if (cycleMode == "random") {
 			rndIndex = Math.floor(Math.random()*arrImg.length);
 			if (rndIndex == rndIndexOld) {
-				while (rndIndex == rndIndexOld) {			rndIndex = Math.floor(Math.random()*arrImg.length);
+				while (rndIndex == rndIndexOld) {
+					rndIndex = Math.floor(Math.random()*arrImg.length);
 				}
 			}
 		// Cycle through photos in order
