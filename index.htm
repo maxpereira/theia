@@ -1,20 +1,16 @@
 <html>
 <head>
-    <title>Theia Signage Client</title>
-    <script type="text/javscript">
-        
-        function theiaLoad() {   
-            var arrImg = ["cat1.jpeg", "cat2.jpeg"]
-            var imgNext = new Image();
-            imgNext.src = "./images/" + arrImg[0];
-            document.getElementById("theiaContainer").appendChild(imgNext);
-            console.info("WTF");
-        }
-
-        window.onload = theiaLoad;
-    </script>
-</head>
+<script type="text/javascript">
+	function theiaLoad() {
+		var arrImg = ["cat1.jpeg", "cat2.jpeg"];
+		var imgNext = new Image();
+		imgNext.src = "images/" + arrImg[0];
+		document.getElementById("theiaContainer").appendChild(imgNext);
+	}
+	
+	window.onload=theiaLoad;
+</script>
 <body>
-    <div id="theiaContainer"></div>
+	<div id="theiaContainer"></div>
 </body>
 </html>
