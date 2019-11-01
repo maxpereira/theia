@@ -20,10 +20,10 @@
 	// ------------- Configurable Theia Options -------------
 	
 	// Choose cycle mode (random, ordered)
-	var cycleMode = "ordered"; // Default: ordered
+	var cycleMode = "random"; // Default: ordered
 	
 	// Image display duration in seconds
-	var duration = 3; // Default: 30
+	var duration = 1; // Default: 30
 	
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
@@ -47,9 +47,11 @@
 	function theiaTick() {
 		
 		// Get array of image filenames from files.txt
-		$.get('files.txt', function(data) {    
+		$.get("files.txt", function(data) {    
 			arrImg = data.split("\n");
-		})
+		});
+	
+		console.info(arrImg);
 	
 		var imgNext = new Image();
 		
@@ -58,6 +60,8 @@
 		// Randomly cycle through photos
 		if (cycleMode == "random") {
 			rndIndex = Math.floor(Math.random()*arrImg.length);
+			
+			// While bug is caused by the same bug that makes the array [] on first run
 			if (rndIndex == rndIndexOld) {
 				rndIndex = Math.floor(Math.random()*arrImg.length);
 				if (rndIndex == rndIndexOld) {
