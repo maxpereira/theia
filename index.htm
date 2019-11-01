@@ -17,19 +17,19 @@
 	// ------------- Configurable Theia Options -------------
 	
 	// Choose cycle mode (random, ordered)
-	var cycleMode = "ordered"; // Default: ordered
+	var cycleMode = "random"; // Default: ordered
 	
 	// Image display duration in seconds
-	var duration = 1; // Default: 30
+	var duration = 3; // Default: 30
 	
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
 	var forceWidth = 1920;
 	var forceHeight = 1080;
 	
-	// Fade between images (NOT IMPLEMENTED YET)
-	var fadeBetween = false; // Default: false
-	var fadeTime = 3; // Fade time in seconds
+	// Fade between images
+	var fadeBetween = true; // Default: false
+	var fadeTime = 1; // Fade time in seconds
 
 	// -------------  END Configurable Options  -------------
 
@@ -43,6 +43,8 @@
 	var rndIndex = 0;
 	var rndIndexOld = 0;
 	
+	var currentDiv = 1;
+	
 	// Load the next image to the viewport randomly
 	function theiaTick() {
 		var imgNext = new Image();
@@ -53,7 +55,8 @@
 		if (cycleMode == "random") {
 			rndIndex = Math.floor(Math.random()*arrImg.length);
 			if (rndIndex == rndIndexOld) {
-				rndIndex = Math.floor(Math.random()*arrImg.length);
+				while (rndIndex == rndIndexOld) {			rndIndex = Math.floor(Math.random()*arrImg.length);
+				}
 			}
 		// Cycle through photos in order
 		} else if (cycleMode == "ordered") {
@@ -70,9 +73,25 @@
 			imgNext.width = forceWidth;
 			imgNext.height = forceHeight;
 		}
-
-		document.body.innerHTML = "<div id='theiaContainer'></div>";
-		document.body.appendChild(imgNext);
+		
+		if (fadeBetween == false) {
+			document.getElementById("theiaContainer").innerHTML = "";
+			document.getElementById("theiaContainer").appendChild(imgNext);
+		} else if (fadeBetween == true) {
+			if (currentDiv == 1) {
+				document.getElementById("theiaContainer2").innerHTML = "";
+				document.getElementById("theiaContainer2").appendChild(imgNext);
+				$("#theiaContainer").fadeOut(fadeTime*1000);
+				$("#theiaContainer2").fadeIn(fadeTime*1000);
+				currentDiv = 2;
+			} else if (currentDiv == 2) {
+				document.getElementById("theiaContainer").innerHTML = "";
+				document.getElementById("theiaContainer").appendChild(imgNext);
+				$("#theiaContainer2").fadeOut(fadeTime*1000);
+				$("#theiaContainer").fadeIn(fadeTime*1000);
+				currentDiv = 1;			
+			}
+		}
 	}
 	
 	// Load the first image on page load
@@ -82,5 +101,7 @@
 	setInterval(theiaTick, duration*1000);
 </script>
 <body bgcolor="black">
+	<div id="theiaContainer" display="none"></div>
+	<div id="theiaContainer2" display="none"></div>
 </body>
 </html>
