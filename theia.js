@@ -11,7 +11,7 @@
 	var imageListFile = "files.txt"
 
 	// Image display duration in seconds
-	var duration = 1; // Default: 30
+	var duration = 30; // Default: 30
 
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
@@ -19,8 +19,8 @@
 	var forceHeight = 1080;
 
 	// Fade between images
-	var fadeBetween = false; // Default: false
-	var fadeTime = 1; // Fade time in seconds
+	var fadeBetween = true; // Default: true
+	var fadeTime = 1; // Fade time in seconds, Default: 1
 
 	// -------------  END Configurable Options  -------------
 
@@ -28,11 +28,17 @@
 	var rndIndexOld = 0;
 	var currentDiv = 1;
 	var arrImg = [];
-
+	
 	// Get array of image filenames from imageListFile (specified above)
-	$.get(imageListFile, function (data)
-	{
-		arrImg = data.split("\n");
+	$(window).on("load", function() {
+		$.get(imageListFile, function (data)
+		{
+			arrImg = data.split("\n");
+			
+			// Start Theia heartbeat
+			theiaTick();
+			setInterval(theiaTick, duration * 1000);
+		});
 	});
 	
 	// Load the next image to the viewport randomly
@@ -103,8 +109,3 @@
 			}
 		}
 	}
-
-	window.onload = theiaTick;
-
-	// Start Theia heartbeat
-	setInterval(theiaTick, duration * 1000);
