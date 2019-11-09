@@ -11,7 +11,7 @@
 	var imageListFile = "files.txt"
 
 	// Image display duration in seconds
-	var duration = 5; // Default: 30
+	var duration = 3; // Default: 30
 
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
@@ -28,6 +28,7 @@
 	// x - Toggles fading between images
 	// c - Toggles forcing image size
 	// v - Toggles cycle mode between ordered and random
+	// b - Toggles manual mode (stops automatic advance to next image)
 	var enableDebugKeys = true; // Default: false
 
 	// -------------  END Configurable Options  -------------
@@ -37,6 +38,8 @@
 	var currentDiv = 1;
 	var arrImg = [];
 	var fadeToggle = false;
+	var theiaInterval = "";
+	var autoAdvance = true;
 	
 	// Get array of image filenames from imageListFile (specified above)
 	$(window).on("load", function() {
@@ -47,7 +50,7 @@
 			
 			// Start Theia heartbeat
 			theiaTick();
-			setInterval(theiaTick, duration * 1000);
+			theiaInterval = setInterval(theiaTick, duration * 1000);
 		});
 	});
 
@@ -56,6 +59,10 @@
     e = e || window.event;
 	    if (enableDebugKeys == true) {
 	    	if (e.keyCode == "122") { // z
+	    		if (autoAdvance == true) {
+		    		clearInterval(theiaInterval);
+					theiaInterval = setInterval(theiaTick, duration * 1000);
+	    		}
 				theiaTick();
 			}
 			if (e.keyCode == "120") { // x
@@ -73,6 +80,16 @@
 					cycleMode = "random";
 				} else if (cycleMode == "random") {
 					cycleMode = "ordered"
+				}
+			}
+			if (e.keyCode == "98") { // b
+				if (autoAdvance == true) {
+					clearInterval(theiaInterval);
+					autoAdvance = false;
+				} else if (autoAdvance == false) {
+					theiaTick();
+					theiaInterval = setInterval(theiaTick, duration * 1000);
+					autoAdvance = true;
 				}
 			}
 	    }
