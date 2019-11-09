@@ -2,6 +2,12 @@
 	// Author: Max Pereira - 2019
 	// Github: maxpereira
 
+	// Debug Keys
+	// (NOTE: toggling using debug keys only lasts for current session)
+	// z - Advance to next image
+	// x - Toggles fading between images
+	// c - Toggles forcing image size
+
 	// ------------- Configurable Theia Options -------------
 
 	// Choose cycle mode (random, ordered)
@@ -43,10 +49,6 @@
 	});
 
 	// Handle debug keypresses
-	//
-	// z - Advance to next image
-	// x - Toggles fading between images
-	// c - Toggles forcing image size
 	document.onkeypress = function (e) {
     e = e || window.event;
 		if (e.keyCode == "122") { // z
