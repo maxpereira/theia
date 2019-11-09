@@ -33,6 +33,7 @@
 	$(window).on("load", function() {
 		$.get(imageListFile, function (data)
 		{
+			// Split imageListFile by line into array
 			arrImg = data.split("\n");
 			
 			// Start Theia heartbeat
@@ -40,20 +41,41 @@
 			setInterval(theiaTick, duration * 1000);
 		});
 	});
+
+	// Handle debug keypresses
+	//
+	// z - Advance to next image
+	// x - Toggles fading between images
+	// c - Toggles forcing image size
+	document.onkeypress = function (e) {
+    e = e || window.event;
+		if (e.keyCode == "122") { // z
+			if (fadeBetween == true) {
+				fadeBetween = false;
+			} else if (fadeBetween == false) {
+				fadeBetween = true;
+			}
+		} else if (e.keyCode == "120") { // x
+			if (forceSize == true) {
+				forceSize = false;
+			} else if (forceSize == false) {
+				forceSize = true;
+			}
+		} else if (e.keyCode == "99") { // c
+			theiaTick();
+		}
+	}
 	
-	// Load the next image to the viewport randomly
+	// Load the next image to the viewport
 	function theiaTick()
 	{
 		var imgNext = new Image();
-
 		rndIndexOld = rndIndex;
 
 		// Randomly cycle through photos
 		if (cycleMode == "random")
 		{
 			rndIndex = Math.floor(Math.random() * arrImg.length);
-
-			// While bug is caused by the same bug that makes the array [] on first run
 			if (rndIndex == rndIndexOld)
 			{
 				rndIndex = Math.floor(Math.random() * arrImg.length);
@@ -62,8 +84,9 @@
 					rndIndex = Math.floor(Math.random() * arrImg.length);
 				}
 			}
-			// Cycle through photos in order
 		}
+
+		// Cycle through photos in order
 		else if (cycleMode == "ordered")
 		{
 			if (rndIndexOld < arrImg.length - 1)
@@ -76,14 +99,18 @@
 			}
 		}
 
+		// Get next image name
 		var rndImg = arrImg[rndIndex];
 		imgNext.src = "images/" + rndImg;
+
+		// Get forced width and height if enabled
 		if (forceSize == true)
 		{
 			imgNext.width = forceWidth;
 			imgNext.height = forceHeight;
 		}
 
+		// Handle fading between images if enabled
 		if (fadeBetween == false)
 		{
 			document.getElementById("theiaContainer").innerHTML = "";
