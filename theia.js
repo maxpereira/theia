@@ -3,7 +3,7 @@
 	// Github: maxpereira
 
 	// Debug Keys
-	// (NOTE: toggling using debug keys only lasts for current session)
+	// (NOTE: toggling options using debug keys only lasts for current session)
 	// z - Advance to next image
 	// x - Toggles fading between images
 	// c - Toggles forcing image size
