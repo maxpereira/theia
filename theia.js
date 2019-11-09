@@ -128,10 +128,10 @@
 		}
 
 		// Handle fading between images if enabled
-		if (fadeBetween == false) {
+		if (fadeBetween == false && fadeToggle == false) {
 			document.getElementById("theiaContainer").innerHTML = "";
 			document.getElementById("theiaContainer").appendChild(imgNext);
-		} else if (fadeBetween == true) {
+		} else if (fadeBetween == true && fadeToggle == false) {
 			if (currentDiv == 1)
 			{
 				document.getElementById("theiaContainer2").innerHTML = "";
@@ -150,12 +150,14 @@
 			}
 		}
 		if (fadeToggle == true && fadeBetween == false) {
-			console.info("Toggle1");
+			document.getElementById("theiaContainer").innerHTML = "";
+			document.getElementById("theiaContainer").appendChild(imgNext);
 			$("#theiaContainer2").toggle();
 			$("#theiaContainer").toggle();
 			fadeToggle = false;
 		} else if (fadeToggle == true && fadeBetween == true) {
-			console.info("Toggle2");
+			document.getElementById("theiaContainer2").innerHTML = "";
+			document.getElementById("theiaContainer2").appendChild(imgNext);
 			$("#theiaContainer2").fadeToggle(fadeTime * 1000);
 			$("#theiaContainer").fadeToggle(fadeTime * 1000);
 			fadeToggle = false;
