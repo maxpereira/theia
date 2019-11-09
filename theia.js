@@ -5,7 +5,10 @@
 	// ------------- Configurable Theia Options -------------
 
 	// Choose cycle mode (random, ordered)
-	var cycleMode = "random"; // Default: ordered
+	var cycleMode = "ordered"; // Default: ordered
+	
+	// Name of file to load image names from
+	var imageListFile = "files.txt"
 
 	// Image display duration in seconds
 	var duration = 1; // Default: 30
@@ -23,23 +26,18 @@
 
 	var rndIndex = 0;
 	var rndIndexOld = 0;
-
 	var currentDiv = 1;
-
 	var arrImg = [];
 
+	// Get array of image filenames from imageListFile (specified above)
+	$.get(imageListFile, function (data)
+	{
+		arrImg = data.split("\n");
+	});
+	
 	// Load the next image to the viewport randomly
 	function theiaTick()
 	{
-
-		// Get array of image filenames from files.txt
-		$.get("files.txt", function (data)
-		{
-			arrImg = data.split("\n");
-		});
-
-		console.info(arrImg);
-
 		var imgNext = new Image();
 
 		rndIndexOld = rndIndex;
