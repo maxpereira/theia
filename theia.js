@@ -116,35 +116,28 @@
 	}
 	
 	// Load the next image to the viewport
-	function theiaTick()
-	{
+	function theiaTick() {
 		var imgNext = new Image();
 		rndIndexOld = rndIndex;
 
 		// Randomly cycle through photos
-		if (cycleMode == "random")
-		{
+		if (cycleMode == "random") {
 			rndIndex = Math.floor(Math.random() * arrImg.length);
-			if (rndIndex == rndIndexOld)
-			{
+			if (rndIndex == rndIndexOld) {
 				rndIndex = Math.floor(Math.random() * arrImg.length);
-				if (rndIndex == rndIndexOld)
-				{
+				if (rndIndex == rndIndexOld) {
 					rndIndex = Math.floor(Math.random() * arrImg.length);
 				}
 			}
 		}
 
 		// Cycle through photos in order
-		else if (cycleMode == "ordered")
-		{
-			if (rndIndexOld < arrImg.length - 1)
-			{
+		else if (cycleMode == "ordered") {
+			if (rndIndexOld < arrImg.length - 1) {
 				rndIndex = rndIndexOld + 1;
 				console.info(rndIndex);
 			}
-			else
-			{
+			else {
 				if (loopOrdered == true) {
 					rndIndex = 0;
 				} else if (loopOrdered == false) {
@@ -159,8 +152,7 @@
 		imgNext.src = "images/" + rndImg;
 
 		// Get forced width and height if enabled
-		if (forceSize == true)
-		{
+		if (forceSize == true) {
 			imgNext.width = forceWidth;
 			imgNext.height = forceHeight;
 		}
@@ -177,16 +169,13 @@
 
 		// Handle fading between images if enabled
 		if (fadeBetween == false) {
-			if (currentDiv == 1)
-			{
+			if (currentDiv == 1) {
 				document.getElementById("theiaContainer2").innerHTML = "";
 				document.getElementById("theiaContainer2").appendChild(imgNext);
 				$("#theiaContainer").toggle();
 				$("#theiaContainer2").toggle();
 				currentDiv = 2;
-			}
-			else if (currentDiv == 2)
-			{
+			} else if (currentDiv == 2) {
 				document.getElementById("theiaContainer").innerHTML = "";
 				document.getElementById("theiaContainer").appendChild(imgNext);
 				$("#theiaContainer2").toggle();
@@ -194,16 +183,13 @@
 				currentDiv = 1;
 			}
 		} else if (fadeBetween == true) {
-			if (currentDiv == 1)
-			{
+			if (currentDiv == 1) {
 				document.getElementById("theiaContainer2").innerHTML = "";
 				document.getElementById("theiaContainer2").appendChild(imgNext);
 				$("#theiaContainer").fadeOut(fadeTime * 1000);
 				$("#theiaContainer2").fadeIn(fadeTime * 1000);
 				currentDiv = 2;
-			}
-			else if (currentDiv == 2)
-			{
+			} else if (currentDiv == 2) {
 				document.getElementById("theiaContainer").innerHTML = "";
 				document.getElementById("theiaContainer").appendChild(imgNext);
 				$("#theiaContainer2").fadeOut(fadeTime * 1000);
