@@ -6,6 +6,9 @@
 
 	// Choose cycle mode (random, ordered)
 	var cycleMode = "ordered"; // Default: ordered
+
+	// Loop at the end of the image set in ordered mode (false freezes on last image)
+	var loopOrdered = true; // Default: true
 	
 	// Name of file to load image names from
 	var imageListFile = "files.txt"
@@ -33,8 +36,8 @@
 
 	// -------------  END Configurable Options  -------------
 
-	var rndIndex = 0;
-	var rndIndexOld = 0;
+	var rndIndex = -1;
+	var rndIndexOld = -1;
 	var currentDiv = 1;
 	var arrImg = [];
 	var fadeToggle = false;
@@ -121,10 +124,16 @@
 			if (rndIndexOld < arrImg.length - 1)
 			{
 				rndIndex = rndIndexOld + 1;
+				console.info(rndIndex);
 			}
 			else
 			{
-				rndIndex = 0;
+				if (loopOrdered == true) {
+					rndIndex = 0;
+				} else if (loopOrdered == false) {
+					clearInterval(theiaInterval);
+					fadeToggle = true;
+				}
 			}
 		}
 
