@@ -27,11 +27,12 @@
 
 	// Debug Keys
 	// (NOTE: toggling options using debug keys only lasts for current session)
-	// z - Advance to next image
-	// x - Toggles fading between images
-	// c - Toggles forcing image size
-	// v - Toggles cycle mode between ordered and random
-	// b - Toggles manual mode (stops automatic advance to next image)
+	// . - Advance to next image
+	// , - Reverse to previous image
+	// z - Toggles fading between images
+	// x - Toggles forcing image size
+	// c - Toggles cycle mode between ordered and random
+	// v - Toggles manual mode (stops automatic advance to next image)
 	var enableDebugKeys = true; // Default: false
 
 	// -------------  END Configurable Options  -------------
@@ -61,31 +62,31 @@
 	document.onkeypress = function (e) {
     e = e || window.event;
 	    if (enableDebugKeys == true) {
-	    	if (e.keyCode == "122") { // z
+	    	if (e.keyCode == "46") { // .
 	    		if (autoAdvance == true) {
 		    		clearInterval(theiaInterval);
 					theiaInterval = setInterval(theiaTick, duration * 1000);
 	    		}
 				theiaTick();
 			}
-			if (e.keyCode == "120") { // x
+			if (e.keyCode == "122") { // z
 				fadeToggle = true;
 			}
-			if (e.keyCode == "99") { // c
+			if (e.keyCode == "120") { // x
 				if (forceSize == true) {
 					forceSize = false;
 				} else if (forceSize == false) {
 					forceSize = true;
 				}
 			}
-			if (e.keyCode == "118") { // v
+			if (e.keyCode == "99") { // c
 				if (cycleMode == "ordered") {
 					cycleMode = "random";
 				} else if (cycleMode == "random") {
 					cycleMode = "ordered"
 				}
 			}
-			if (e.keyCode == "98") { // b
+			if (e.keyCode == "118") { // v
 				if (autoAdvance == true) {
 					clearInterval(theiaInterval);
 					autoAdvance = false;
@@ -94,6 +95,22 @@
 					theiaInterval = setInterval(theiaTick, duration * 1000);
 					autoAdvance = true;
 				}
+			}
+			if (e.keyCode == "44") { // ,
+				if (rndIndexOld-1 < 0) {
+					if (cycleMode == "ordered") {
+						rndIndex = arrImg.length-1;
+					} else if (cycleMode == "random") {
+						// No need to go back in random mode
+					}
+				} else {
+					rndIndex = rndIndexOld-1
+				}
+				if (autoAdvance == true) {
+		    		clearInterval(theiaInterval);
+					theiaInterval = setInterval(theiaTick, duration * 1000);
+	    		}
+				theiaTick();
 			}
 	    }
 	}
