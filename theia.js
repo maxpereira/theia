@@ -91,7 +91,6 @@
 					clearInterval(theiaInterval);
 					autoAdvance = false;
 				} else if (autoAdvance == false) {
-					theiaTick();
 					theiaInterval = setInterval(theiaTick, duration * 1000);
 					autoAdvance = true;
 				}
