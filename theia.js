@@ -11,7 +11,7 @@
 	var imageListFile = "files.txt"
 
 	// Image display duration in seconds
-	var duration = 5; // Default: 30
+	var duration = 100; // Default: 30
 
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
@@ -155,11 +155,13 @@
 			$("#theiaContainer2").toggle();
 			$("#theiaContainer").toggle();
 			fadeToggle = false;
+			currentDiv = 2;
 		} else if (fadeToggle == true && fadeBetween == true) {
 			document.getElementById("theiaContainer2").innerHTML = "";
 			document.getElementById("theiaContainer2").appendChild(imgNext);
 			$("#theiaContainer2").fadeToggle(fadeTime * 1000);
 			$("#theiaContainer").fadeToggle(fadeTime * 1000);
 			fadeToggle = false;
+			currentDiv = 1;
 		}
 	}
