@@ -11,7 +11,7 @@
 	var imageListFile = "files.txt"
 
 	// Image display duration in seconds
-	var duration = 30; // Default: 30
+	var duration = 5; // Default: 30
 
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
@@ -20,7 +20,7 @@
 
 	// Fade between images
 	var fadeBetween = true; // Default: true
-	var fadeTime = 1; // Fade time in seconds, Default: 1
+	var fadeTime = 2; // Fade time in seconds, Default: 1
 
 	// -------------  END Configurable Options  -------------
 
