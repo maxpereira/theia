@@ -11,7 +11,7 @@
 	var imageListFile = "files.txt"
 
 	// Image display duration in seconds
-	var duration = 100; // Default: 30
+	var duration = 5; // Default: 30
 
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
@@ -20,7 +20,7 @@
 
 	// Fade between images
 	var fadeBetween = true; // Default: true
-	var fadeTime = 2; // Fade time in seconds, Default: 1
+	var fadeTime = 1; // Fade time in seconds, Default: 1
 
 	// Debug Keys
 	// (NOTE: toggling options using debug keys only lasts for current session)
@@ -59,11 +59,6 @@
 				theiaTick();
 			}
 			if (e.keyCode == "120") { // x
-				if (fadeBetween == true) {
-					fadeBetween = false;
-				} else if (fadeBetween == false) {
-					fadeBetween = true;
-				}
 				fadeToggle = true;
 			}
 			if (e.keyCode == "99") { // c
@@ -127,11 +122,35 @@
 			imgNext.height = forceHeight;
 		}
 
+		// Handle fade toggle debug key
+		if (fadeToggle == true) {
+			if (fadeBetween == true) {
+				fadeBetween = false;
+			} else if (fadeBetween == false) {
+				fadeBetween = true;
+			}
+			fadeToggle = false;
+		}
+
 		// Handle fading between images if enabled
-		if (fadeBetween == false && fadeToggle == false) {
-			document.getElementById("theiaContainer").innerHTML = "";
-			document.getElementById("theiaContainer").appendChild(imgNext);
-		} else if (fadeBetween == true && fadeToggle == false) {
+		if (fadeBetween == false) {
+			if (currentDiv == 1)
+			{
+				document.getElementById("theiaContainer2").innerHTML = "";
+				document.getElementById("theiaContainer2").appendChild(imgNext);
+				$("#theiaContainer").toggle();
+				$("#theiaContainer2").toggle();
+				currentDiv = 2;
+			}
+			else if (currentDiv == 2)
+			{
+				document.getElementById("theiaContainer").innerHTML = "";
+				document.getElementById("theiaContainer").appendChild(imgNext);
+				$("#theiaContainer2").toggle();
+				$("#theiaContainer").toggle();
+				currentDiv = 1;
+			}
+		} else if (fadeBetween == true) {
 			if (currentDiv == 1)
 			{
 				document.getElementById("theiaContainer2").innerHTML = "";
@@ -148,20 +167,5 @@
 				$("#theiaContainer").fadeIn(fadeTime * 1000);
 				currentDiv = 1;
 			}
-		}
-		if (fadeToggle == true && fadeBetween == false) {
-			document.getElementById("theiaContainer").innerHTML = "";
-			document.getElementById("theiaContainer").appendChild(imgNext);
-			$("#theiaContainer2").toggle();
-			$("#theiaContainer").toggle();
-			fadeToggle = false;
-			currentDiv = 2;
-		} else if (fadeToggle == true && fadeBetween == true) {
-			document.getElementById("theiaContainer2").innerHTML = "";
-			document.getElementById("theiaContainer2").appendChild(imgNext);
-			$("#theiaContainer2").fadeToggle(fadeTime * 1000);
-			$("#theiaContainer").fadeToggle(fadeTime * 1000);
-			fadeToggle = false;
-			currentDiv = 1;
 		}
 	}
