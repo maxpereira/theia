@@ -2,13 +2,6 @@
 	// Author: Max Pereira - 2019
 	// Github: maxpereira
 
-	// Debug Keys
-	// (NOTE: toggling options using debug keys only lasts for current session)
-	// z - Advance to next image
-	// x - Toggles fading between images
-	// c - Toggles forcing image size
-	// v - Toggles cycle mode between ordered and random
-
 	// ------------- Configurable Theia Options -------------
 
 	// Choose cycle mode (random, ordered)
@@ -29,12 +22,21 @@
 	var fadeBetween = true; // Default: true
 	var fadeTime = 2; // Fade time in seconds, Default: 1
 
+	// Debug Keys
+	// (NOTE: toggling options using debug keys only lasts for current session)
+	// z - Advance to next image
+	// x - Toggles fading between images
+	// c - Toggles forcing image size
+	// v - Toggles cycle mode between ordered and random
+	var enableDebugKeys = true; // Default: false
+
 	// -------------  END Configurable Options  -------------
 
 	var rndIndex = 0;
 	var rndIndexOld = 0;
 	var currentDiv = 1;
 	var arrImg = [];
+	var fadeToggle = false;
 	
 	// Get array of image filenames from imageListFile (specified above)
 	$(window).on("load", function() {
@@ -52,30 +54,33 @@
 	// Handle debug keypresses
 	document.onkeypress = function (e) {
     e = e || window.event;
-    	if (e.keyCode == "122") { // z
-			theiaTick();
-		} 
-		if (e.keyCode == "120") { // x
-			if (fadeBetween == true) {
-				fadeBetween = false;
-			} else if (fadeBetween == false) {
-				fadeBetween = true;
+	    if (enableDebugKeys == true) {
+	    	if (e.keyCode == "122") { // z
+				theiaTick();
 			}
-		}
-		if (e.keyCode == "99") { // c
-			if (forceSize == true) {
-				forceSize = false;
-			} else if (forceSize == false) {
-				forceSize = true;
+			if (e.keyCode == "120") { // x
+				if (fadeBetween == true) {
+					fadeBetween = false;
+				} else if (fadeBetween == false) {
+					fadeBetween = true;
+				}
+				fadeToggle = true;
 			}
-		}
-		if (e.keyCode == "118") { // v
-			if (cycleMode == "ordered") {
-				cycleMode = "random";
-			} else if (cycleMode == "random") {
-				cycleMode = "ordered"
+			if (e.keyCode == "99") { // c
+				if (forceSize == true) {
+					forceSize = false;
+				} else if (forceSize == false) {
+					forceSize = true;
+				}
 			}
-		}
+			if (e.keyCode == "118") { // v
+				if (cycleMode == "ordered") {
+					cycleMode = "random";
+				} else if (cycleMode == "random") {
+					cycleMode = "ordered"
+				}
+			}
+	    }
 	}
 	
 	// Load the next image to the viewport
@@ -123,13 +128,10 @@
 		}
 
 		// Handle fading between images if enabled
-		if (fadeBetween == false)
-		{
+		if (fadeBetween == false) {
 			document.getElementById("theiaContainer").innerHTML = "";
 			document.getElementById("theiaContainer").appendChild(imgNext);
-		}
-		else if (fadeBetween == true)
-		{
+		} else if (fadeBetween == true) {
 			if (currentDiv == 1)
 			{
 				document.getElementById("theiaContainer2").innerHTML = "";
@@ -146,5 +148,16 @@
 				$("#theiaContainer").fadeIn(fadeTime * 1000);
 				currentDiv = 1;
 			}
+		}
+		if (fadeToggle == true && fadeBetween == false) {
+			console.info("Toggle1");
+			$("#theiaContainer2").toggle();
+			$("#theiaContainer").toggle();
+			fadeToggle = false;
+		} else if (fadeToggle == true && fadeBetween == true) {
+			console.info("Toggle2");
+			$("#theiaContainer2").fadeToggle(fadeTime * 1000);
+			$("#theiaContainer").fadeToggle(fadeTime * 1000);
+			fadeToggle = false;
 		}
 	}
