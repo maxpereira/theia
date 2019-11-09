@@ -7,6 +7,7 @@
 	// z - Advance to next image
 	// x - Toggles fading between images
 	// c - Toggles forcing image size
+	// v - Toggles cycle mode between ordered and random
 
 	// ------------- Configurable Theia Options -------------
 
@@ -51,20 +52,29 @@
 	// Handle debug keypresses
 	document.onkeypress = function (e) {
     e = e || window.event;
-		if (e.keyCode == "122") { // z
+    	if (e.keyCode == "122") { // z
+			theiaTick();
+		} 
+		if (e.keyCode == "120") { // x
 			if (fadeBetween == true) {
 				fadeBetween = false;
 			} else if (fadeBetween == false) {
 				fadeBetween = true;
 			}
-		} else if (e.keyCode == "120") { // x
+		}
+		if (e.keyCode == "99") { // c
 			if (forceSize == true) {
 				forceSize = false;
 			} else if (forceSize == false) {
 				forceSize = true;
 			}
-		} else if (e.keyCode == "99") { // c
-			theiaTick();
+		}
+		if (e.keyCode == "118") { // v
+			if (cycleMode == "ordered") {
+				cycleMode = "random";
+			} else if (cycleMode == "random") {
+				cycleMode = "ordered"
+			}
 		}
 	}
 	
