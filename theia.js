@@ -23,6 +23,10 @@
 	// Image display duration in seconds
 	var duration = 3; // Default: 30
 
+	// Vertically and horizontally center images on page
+	// This should be set to false if you're using full size images
+	var centerImages = true;
+
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
 	var forceWidth = 1920;
@@ -144,6 +148,18 @@
 	function theiaTick() {
 		var imgNext = new Image();
 		rndIndexOld = rndIndex;
+
+		imgNext.onload = function() {
+			if (centerImages == true) {
+		  		$(this).css({
+			        'position' : 'absolute',
+			        'left' : '50%',
+			        'top' : '50%',
+			        'margin-left' : -$(this).outerWidth()/2,
+			        'margin-top' : -$(this).outerHeight()/2
+			    });
+			}
+		}
 
 		// Randomly cycle through photos
 		if (cycleMode == "random") {
