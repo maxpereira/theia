@@ -143,10 +143,10 @@
 			}
 			if (e.keyCode == "98") { // b
 				if (cursorVisible == false) {
-					$("*").css("cursor", "auto");
+					$("body").css("cursor", "auto");
 					cursorVisible = true;
 				} else if (cursorVisible == true) {
-					$("*").css("cursor", "none");
+					$("body").css("cursor", "none");
 					cursorVisible = false;
 				}
 			}
