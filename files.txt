@@ -2,3 +2,9 @@ cat1.jpeg
 cat2.jpeg
 cat3.png
 cat4.jpg
+cat5.jpg
+cat6.jpg
+cat7.jpg
+cat8.jpg
+cat9.jpg
+cat10.jpg

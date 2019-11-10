@@ -13,6 +13,9 @@
 	// Name of file to load image names from
 	var imageListFile = "files.txt"
 
+	// Name of directory to load images from
+	var imgDir = "images"
+
 	// Image display duration in seconds
 	var duration = 3; // Default: 30
 
@@ -148,7 +151,7 @@
 
 		// Get next image name
 		var rndImg = arrImg[rndIndex];
-		imgNext.src = "images/" + rndImg;
+		imgNext.src = imgDir + "/" + rndImg;
 
 		// Get forced width and height if enabled
 		if (forceSize == true) {
