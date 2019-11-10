@@ -61,7 +61,7 @@
 		$("*").css("cursor", "none");
 
 		// Set page background color
-		$("*").css("background-color", bckColor);
+		$("body").css("background-color", bckColor);
 
 		// Get array of image filenames from imageListFile (specified above)
 		$.get(imageListFile, function (data)
