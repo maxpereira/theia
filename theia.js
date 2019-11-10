@@ -11,10 +11,14 @@
 	var loopOrdered = true; // Default: true
 	
 	// Name of file to load image names from
-	var imageListFile = "files.txt"
+	var imageListFile = "files.txt";
 
 	// Name of directory to load images from
-	var imgDir = "images"
+	var imgDir = "images";
+
+	// Background color of page (hex or color name)
+	// This shouldn't matter if you're using full size images
+	var bckColor = "black";
 
 	// Image display duration in seconds
 	var duration = 3; // Default: 30
@@ -54,7 +58,10 @@
 	$(window).on("load", function() {
 
 		// Hide cursor on page
-		$('*').css('cursor', 'none');
+		$("*").css("cursor", "none");
+
+		// Set page background color
+		$("*").css("background-color", bckColor);
 
 		// Get array of image filenames from imageListFile (specified above)
 		$.get(imageListFile, function (data)
@@ -123,10 +130,10 @@
 			}
 			if (e.keyCode == "98") { // b
 				if (cursorVisible == false) {
-					$('*').css('cursor', 'auto');
+					$("*").css("cursor", "auto");
 					cursorVisible = true;
 				} else if (cursorVisible == true) {
-					$('*').css('cursor', 'none');
+					$("*").css("cursor", "none");
 					cursorVisible = false;
 				}
 			}
