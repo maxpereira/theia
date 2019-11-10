@@ -1,3 +1,12 @@
+
+	//	 _______  __   __  _______  ___   _______ 
+	//	|       ||  | |  ||       ||   | |   _   |
+	//	|_     _||  |_|  ||    ___||   | |  |_|  |
+	//	  |   |  |       ||   |___ |   | |       |
+	//	  |   |  |       ||    ___||   | |       |
+	//	  |   |  |   _   ||   |___ |   | |   _   |
+	//	  |___|  |__| |__||_______||___| |__| |__|
+
 	// Theia Digital Signage Software
 	// Author: Max Pereira - 2019
 	// Github: maxpereira
@@ -40,11 +49,11 @@
 	// (NOTE: toggling options using debug keys only lasts for current session)
 	// . - Advance to next image
 	// , - Reverse to previous image
-	// z - Toggles fading between images
-	// x - Toggles forcing image size
-	// c - Toggles cycle mode between ordered and random
-	// v - Toggles manual mode (stops automatic advance to next image)
-	// b - Toggles cursor visibility
+	// z - Toggle fading between images
+	// x - Toggle forcing image size
+	// c - Toggle cycle mode between ordered and random
+	// v - Toggle manual mode (stops automatic advance to next image)
+	// b - Toggle cursor visibility
 	var enableDebugKeys = true; // Default: false
 
 	// -------------  END Configurable Options  -------------
@@ -149,6 +158,7 @@
 		var imgNext = new Image();
 		rndIndexOld = rndIndex;
 
+		// Vertically and horizontally center images if enabled
 		imgNext.onload = function() {
 			if (centerImages == true) {
 		  		$(this).css({
