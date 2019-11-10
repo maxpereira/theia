@@ -36,6 +36,7 @@
 	// x - Toggles forcing image size
 	// c - Toggles cycle mode between ordered and random
 	// v - Toggles manual mode (stops automatic advance to next image)
+	// b - Toggles cursor visibility
 	var enableDebugKeys = true; // Default: false
 
 	// -------------  END Configurable Options  -------------
@@ -45,11 +46,17 @@
 	var currentDiv = 1;
 	var arrImg = [];
 	var fadeToggle = false;
+	var cursorVisible = false;
 	var theiaInterval = "";
 	var autoAdvance = true;
 	
-	// Get array of image filenames from imageListFile (specified above)
+	// Triggered on window load
 	$(window).on("load", function() {
+
+		// Hide cursor on page
+		$('*').css('cursor', 'none');
+
+		// Get array of image filenames from imageListFile (specified above)
 		$.get(imageListFile, function (data)
 		{
 			// Split imageListFile by line into array
@@ -113,6 +120,15 @@
 					theiaInterval = setInterval(theiaTick, duration * 1000);
 	    		}
 				theiaTick();
+			}
+			if (e.keyCode == "98") { // b
+				if (cursorVisible == false) {
+					$('*').css('cursor', 'auto');
+					cursorVisible = true;
+				} else if (cursorVisible == true) {
+					$('*').css('cursor', 'none');
+					cursorVisible = false;
+				}
 			}
 	    }
 	}
