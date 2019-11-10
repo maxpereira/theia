@@ -42,7 +42,7 @@
 	var forceHeight = 1080;
 
 	// Fade between images
-	var fadeBetween = false; // Default: true
+	var fadeBetween = true; // Default: true
 	var fadeTime = 1; // Fade time in seconds, Default: 1
 
 	// Debug Keys
@@ -168,10 +168,14 @@
 
 		// Vertically and horizontally center images if enabled
 		imgNext.onload = function() {
-			if (fadeBetween == false) {
 				if (currentDiv == 2) {
-					$("#theiaContainer2").hide();
-					$("#theiaContainer").show();
+					if (fadeBetween == false) {
+						$("#theiaContainer2").hide();
+						$("#theiaContainer").show();
+					} else if (fadeBetween == true) {
+						$("#theiaContainer2").fadeOut(fadeTime * 1000);
+						$("#theiaContainer").fadeIn(fadeTime * 1000);						
+					}
 					if (centerImages == true) {
 				  		$(this).css({
 					        'position' : 'absolute',
@@ -189,8 +193,13 @@
 					}
 					currentDiv = 1;
 				} else if (currentDiv == 1) {
-					$("#theiaContainer2").show();
-					$("#theiaContainer").hide();
+					if (fadeBetween == false) {
+						$("#theiaContainer2").show();
+						$("#theiaContainer").hide();
+					} else if (fadeBetween == true) {
+						$("#theiaContainer2").fadeIn(fadeTime * 1000);
+						$("#theiaContainer").fadeOut(fadeTime * 1000);						
+					}
 					if (centerImages == true) {
 				  		$(this).css({
 					        'position' : 'absolute',
@@ -209,8 +218,6 @@
 					currentDiv = 2;
 				}
 			}
-
-		}
 
 		// Randomly cycle through photos
 		if (cycleMode == "random") {
@@ -271,15 +278,11 @@
 			if (currentDiv == 1) {
 				document.getElementById("theiaContainer2").innerHTML = "";
 				document.getElementById("theiaContainer2").appendChild(imgNext);
-				$("#theiaContainer").fadeOut(fadeTime * 1000);
-				$("#theiaContainer2").fadeIn(fadeTime * 1000);
-				currentDiv = 2;
 			} else if (currentDiv == 2) {
 				document.getElementById("theiaContainer").innerHTML = "";
 				document.getElementById("theiaContainer").appendChild(imgNext);
 				$("#theiaContainer2").fadeOut(fadeTime * 1000);
 				$("#theiaContainer").fadeIn(fadeTime * 1000);
-				currentDiv = 1;
 			}
 		}
 	}
