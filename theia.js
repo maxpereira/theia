@@ -48,6 +48,10 @@
 	// Set cursor visibility
 	var cursorVisible = false; // Default: false
 
+	// Automatically advance to the next image
+	// If disabled, you'll have to use debug keys to advance and reverse
+	var autoAdvance = false;
+
 	// Debug Keys
 	// (NOTE: toggling options using debug keys only lasts for current session)
 	// . - Advance to next image
@@ -67,8 +71,7 @@
 	var currentDiv = 1;
 	var arrImg = [];
 	var fadeToggle = false;
-	var theiaInterval = "";
-	var autoAdvance = true;
+	var theiaInterval;
 	
 	// Triggered on window load
 	$(window).on("load", function() {
@@ -91,7 +94,9 @@
 			
 			// Start Theia heartbeat
 			theiaTick();
-			theiaInterval = setInterval(theiaTick, duration * 1000);
+			if (autoAdvance == true) {
+				theiaInterval = setInterval(theiaTick, duration * 1000);
+			}
 		});
 	});
 
