@@ -18,32 +18,35 @@
 
 	// Loop at the end of the image set in ordered mode (false freezes on last image)
 	var loopOrdered = true; // Default: true
+
+	// Fade between images
+	var fadeBetween = true; // Default: true
+	var fadeTime = 1; // Fade time in seconds, Default: 1
 	
+	// Vertically and horizontally center images on page
+	// This should be set to false if you're using full size images
+	var centerImages = true;
+
+	// Image display duration in seconds
+	var duration = 3; // Default: 30
+
+	// Background color of page (hex or color name)
+	// This shouldn't matter if you're using full size images
+	var bckColor = "black";
+
 	// Name of file to load image names from
 	var imageListFile = "files.txt";
 
 	// Name of directory to load images from
 	var imgDir = "images";
 
-	// Background color of page (hex or color name)
-	// This shouldn't matter if you're using full size images
-	var bckColor = "black";
-
-	// Image display duration in seconds
-	var duration = 3; // Default: 30
-
-	// Vertically and horizontally center images on page
-	// This should be set to false if you're using full size images
-	var centerImages = true;
-
 	// Force image size to fit the screen
 	var forceSize = false; // Default: false
 	var forceWidth = 1920;
 	var forceHeight = 1080;
 
-	// Fade between images
-	var fadeBetween = true; // Default: true
-	var fadeTime = 1; // Fade time in seconds, Default: 1
+	// Set cursor visibility
+	var cursorVisible = false; // Default: false
 
 	// Debug Keys
 	// (NOTE: toggling options using debug keys only lasts for current session)
@@ -64,15 +67,18 @@
 	var currentDiv = 1;
 	var arrImg = [];
 	var fadeToggle = false;
-	var cursorVisible = false;
 	var theiaInterval = "";
 	var autoAdvance = true;
 	
 	// Triggered on window load
 	$(window).on("load", function() {
 
-		// Hide cursor on page
-		$("*").css("cursor", "none");
+		// Set cursor visibility
+		if (cursorVisible == true) {
+			$("body").css("cursor", "auto");
+		} else if (cursorVisible == false) {
+			$("body").css("cursor", "none");
+		}
 
 		// Set page background color
 		$("body").css("background-color", bckColor);
