@@ -54,6 +54,7 @@
 	// c - Toggle cycle mode between ordered and random
 	// v - Toggle manual mode (stops automatic advance to next image)
 	// b - Toggle cursor visibility
+	// n - Toggle centering images vertically and horizontally
 	var enableDebugKeys = true; // Default: false
 
 	// -------------  END Configurable Options  -------------
@@ -150,6 +151,13 @@
 					cursorVisible = false;
 				}
 			}
+			if (e.keyCode == "110") { // n
+				if (centerImages == true) {
+					centerImages = false;
+				} else if (centerImages == false) {
+					centerImages = true;
+				}
+			}
 	    }
 	}
 	
@@ -168,6 +176,12 @@
 			        'margin-left' : -$(this).outerWidth()/2,
 			        'margin-top' : -$(this).outerHeight()/2
 			    });
+			} else if (centerImages == false) {
+				$(this).css({
+					'position': 'fixed',
+					'top': '0',
+					'left': '0'
+				});
 			}
 		}
 
