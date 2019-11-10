@@ -137,7 +137,6 @@
 		else if (cycleMode == "ordered") {
 			if (rndIndexOld < arrImg.length - 1) {
 				rndIndex = rndIndexOld + 1;
-				console.info(rndIndex);
 			}
 			else {
 				if (loopOrdered == true) {
