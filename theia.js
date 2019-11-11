@@ -30,6 +30,9 @@
 	// Image display duration in seconds
 	var duration = 3; // Default: 30
 
+	// Image scale (useful if using Theia inside an iframe)
+	var imgScale = 1.0 // Default: 1.0
+
 	// Background color of page (hex or color name)
 	// This shouldn't matter if you're using full size images
 	var bckColor = "black";
@@ -50,7 +53,7 @@
 
 	// Automatically advance to the next image
 	// If disabled, you'll have to use debug keys to advance and reverse
-	var autoAdvance = false;
+	var autoAdvance = true;
 
 	// Debug Keys
 	// (NOTE: toggling options using debug keys only lasts for current session)
@@ -192,14 +195,18 @@
 					        'position' : 'absolute',
 					        'left' : '50%',
 					        'top' : '50%',
-					        'margin-left' : -$(this).outerWidth()/2,
-					        'margin-top' : -$(this).outerHeight()/2
+					        'margin-left' : -imgScale * $(this).outerWidth()/2,
+					        'margin-top' : -imgScale * $(this).outerHeight()/2,
+					        'width': imgScale*$(this).width(),
+							'height': imgScale*$(this).height()
 					    });
 					} else if (centerImages == false) {
 						$(this).css({
 							'position': 'fixed',
 							'top': '0',
-							'left': '0'
+							'left': '0',
+							'width': imgScale*$(this).width(),
+							'height': imgScale*$(this).height()
 						});
 					}
 					currentDiv = 1;
@@ -216,14 +223,18 @@
 					        'position' : 'absolute',
 					        'left' : '50%',
 					        'top' : '50%',
-					        'margin-left' : -$(this).outerWidth()/2,
-					        'margin-top' : -$(this).outerHeight()/2
+					        'margin-left' : -imgScale * $(this).outerWidth()/2,
+					        'margin-top' : -imgScale * $(this).outerHeight()/2,
+					        'width': imgScale*$(this).width(),
+							'height': imgScale*$(this).height()
 					    });
 					} else if (centerImages == false) {
 						$(this).css({
 							'position': 'fixed',
 							'top': '0',
-							'left': '0'
+							'left': '0',
+							'width': imgScale*$(this).width(),
+							'height': imgScale*$(this).height()
 						});
 					}			
 					currentDiv = 2;
