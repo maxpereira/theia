@@ -59,7 +59,7 @@
 	// z - Toggle fading between images
 	// x - Toggle forcing image size
 	// c - Toggle cycle mode between ordered and random
-	// v - Toggle manual mode (stops automatic advance to next image)
+	// v - Toggle automatic advance to next image
 	// b - Toggle cursor visibility
 	// n - Toggle centering images vertically and horizontally
 	var enableDebugKeys = true; // Default: false
